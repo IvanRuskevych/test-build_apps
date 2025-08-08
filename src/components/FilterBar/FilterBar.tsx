@@ -17,7 +17,10 @@ const FilterBarComponent = ({
   onNationalityChange,
 }: FilterBarProps) => {
   return (
-    <Box>
+    <Box display="flex"
+         flexDirection="row"
+         gap={2}
+         mb={2}>
       <LabeledSelectCustom label={'Gender'}
                            value={gender}
                            options={[...baseOption, ...genderOptions]}

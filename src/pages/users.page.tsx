@@ -1,17 +1,19 @@
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import { type ChangeEvent, useState } from 'react'
+import { FilterBar } from '~/components/FilterBar'
 import { UserTable } from '~/components/UserTable'
-import { useUsers } from '~/hooks'
+import { useUserFilters, useUsers } from '~/hooks'
 import { TablePaginationCustom } from '~/shared/ui'
 
 export const UsersPage = () => {
-  const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
-  
+  const { page, gender, nationality, setPage, setGender, setNationality } = useUserFilters()
   const { users, loading, error } = useUsers({
     page: page + 1,
-    results: rowsPerPage,
+    rowsPerPage,
+    gender,
+    nat: nationality,
   })
   console.log(users, loading, error)
   
@@ -37,6 +39,17 @@ export const UsersPage = () => {
                   mb={3}>
         Users page
       </Typography>
+      
+      <FilterBar gender={gender}
+                 nationality={nationality}
+                 onGenderChange={(value) => {
+                   setGender(value)
+                   setPage(1)
+                 }}
+                 onNationalityChange={(value) => {
+                   setNationality(value)
+                   setPage(1)
+                 }} />
       
       <UserTable users={users} />
       
