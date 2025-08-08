@@ -9,7 +9,10 @@ export const UsersPage = () => {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   
-  const { users, loading, error } = useUsers(page + 1, rowsPerPage)
+  const { users, loading, error } = useUsers({
+    page: page + 1,
+    results: rowsPerPage,
+  })
   console.log(users, loading, error)
   
   const handleChangePage = (

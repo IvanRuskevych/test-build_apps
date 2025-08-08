@@ -1,5 +1,5 @@
 import TablePagination from '@mui/material/TablePagination'
-import { type ChangeEvent, type FC, type MouseEvent } from 'react'
+import { type ChangeEvent, type MouseEvent } from 'react'
 
 interface TablePaginationProps {
   page: number
@@ -9,22 +9,20 @@ interface TablePaginationProps {
   onRowsPerPageChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const UserTablePagination: FC<TablePaginationProps> = ({
+export const UserTablePagination = ({
   page,
   rowsPerPage,
   count,
   onPageChange,
   onRowsPerPageChange,
-}) => {
-  return (
-    <TablePagination
-      component="div"
-      count={count}
-      page={page}
-      onPageChange={onPageChange}
-      rowsPerPage={rowsPerPage}
-      onRowsPerPageChange={onRowsPerPageChange}
-      rowsPerPageOptions={[5, 10, 20]}
-    />
-  )
-}
+}: TablePaginationProps) => (
+  <TablePagination
+    component="div"
+    count={count}
+    page={page}
+    onPageChange={onPageChange}
+    rowsPerPage={rowsPerPage}
+    onRowsPerPageChange={onRowsPerPageChange}
+    rowsPerPageOptions={[5, 10, 20]}
+  />
+)

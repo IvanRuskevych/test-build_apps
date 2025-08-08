@@ -2,20 +2,22 @@ import { useCallback, useEffect, useState } from 'react'
 import type { User } from '~/schemas'
 import { userService } from '~/services'
 
-export const useUsers = (
-  page: number,
-  results: number,
-  gender?: string,
-  nat?: string,
-) => {
+interface UseUsersParams {
+  page: number
+  results: number
+  gender?: string
+  nat?: string
+}
+
+export const useUsers = ({ page, results, gender, nat }: UseUsersParams) => {
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [error, setError] = useState<null | string>(null)
   
   const loadUsers = useCallback(async () => {
       try {
         setLoading(true)
-        setError('')
+        setError(null)
         const data = await userService.getUsers(page, results, gender, nat)
         setUsers(data)
       } catch (err) {
