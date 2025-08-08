@@ -4,6 +4,7 @@ import { userService } from '~/services'
 
 export const useUsers = (
   page: number,
+  results: number,
   gender?: string,
   nat?: string,
 ) => {
@@ -15,7 +16,7 @@ export const useUsers = (
       try {
         setLoading(true)
         setError('')
-        const data = await userService.getUsers(page, gender, nat)
+        const data = await userService.getUsers(page, results, gender, nat)
         setUsers(data)
       } catch (err) {
         console.error(err)
@@ -25,7 +26,7 @@ export const useUsers = (
         setLoading(false)
       }
     },
-    [page, gender, nat],
+    [page, results, gender, nat],
   )
   
   useEffect(() => {

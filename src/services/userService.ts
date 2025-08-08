@@ -6,12 +6,14 @@ const httpService = new HttpService()
 export const userService = {
   getUsers: async (
     page: number,
+    results: number = 10,
     gender?: string,
     nat?: string,
   ): Promise<User[]> => {
     const params: Record<string, string | number> = {
       page,
-      results: 10,
+      results,
+      seed: 'abc', // required for stable pagination with randomuser.me API
     }
     
     if (gender && gender !== 'all') params.gender = gender
