@@ -2,18 +2,18 @@ import { ApiResponseSchema, type User } from '~/schemas'
 import { HttpService } from '~/services/httpService.ts'
 
 const httpService = new HttpService()
-
+// const SEED = 'abc'
 export const userService = {
   getUsers: async (
     page: number,
-    results: number = 10,
+    rowsPerPage: number = 10,
     gender?: string,
     nat?: string,
   ): Promise<User[]> => {
     const params: Record<string, string | number> = {
       page,
-      results,
-      seed: 'abc', // required for stable pagination with randomuser.me API
+      results: rowsPerPage,
+      // seed: SEED, // required for stable pagination with randomuser.me API. But using the "seed" break filtering by param "gender"
     }
     
     if (gender && gender !== 'all') params.gender = gender

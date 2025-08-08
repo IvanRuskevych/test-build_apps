@@ -4,12 +4,12 @@ import { userService } from '~/services'
 
 interface UseUsersParams {
   page: number
-  results: number
+  rowsPerPage: number
   gender?: string
   nat?: string
 }
 
-export const useUsers = ({ page, results, gender, nat }: UseUsersParams) => {
+export const useUsers = ({ page, rowsPerPage, gender, nat }: UseUsersParams) => {
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<null | string>(null)
@@ -18,7 +18,7 @@ export const useUsers = ({ page, results, gender, nat }: UseUsersParams) => {
       try {
         setLoading(true)
         setError(null)
-        const data = await userService.getUsers(page, results, gender, nat)
+        const data = await userService.getUsers(page, rowsPerPage, gender, nat)
         setUsers(data)
       } catch (err) {
         console.error(err)
@@ -28,7 +28,7 @@ export const useUsers = ({ page, results, gender, nat }: UseUsersParams) => {
         setLoading(false)
       }
     },
-    [page, results, gender, nat],
+    [page, rowsPerPage, gender, nat],
   )
   
   useEffect(() => {
