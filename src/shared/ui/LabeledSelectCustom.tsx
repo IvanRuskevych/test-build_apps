@@ -15,15 +15,14 @@ export const LabeledSelectCustom: FC<LabeledSelectCustomProps> = ({
   options,
   onChange,
 }) => (
-  <FormControl>
+  <FormControl fullWidth>
     <InputLabel>{label}</InputLabel>
-    <Select variant={'filled'}
-            value={value}
+    <Select value={value}
             label={label}
             onChange={(e: SelectChangeEvent) => onChange(e.target.value)}>
       {options.map((opt) => (
-        <MenuItem key={opt.label}
-                  value={value}>
+        <MenuItem key={opt.value}
+                  value={opt.value}>
           {opt.label}
         </MenuItem>
       ))}
