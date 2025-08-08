@@ -16,7 +16,7 @@ export const UsersPage = () => {
         Users page
       </Typography>
       
-      <UserTable />
+      <UserTable users={users} />
     </Container>
   )
 }
