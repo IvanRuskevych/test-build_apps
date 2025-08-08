@@ -9,4 +9,15 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
   ],
+  
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          mui: ['@emotion/react', '@emotion/styled', '@mui/icons-material', '@mui/material'],
+        },
+      },
+    },
+  },
 })
