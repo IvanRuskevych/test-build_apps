@@ -2,8 +2,8 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import { type ChangeEvent, useState } from 'react'
 import { UserTable } from '~/components/UserTable'
-import { UserTablePagination } from '~/components/UserTable/UserTablePagination.tsx'
 import { useUsers } from '~/hooks'
+import { TablePaginationCustom } from '~/shared/ui'
 
 export const UsersPage = () => {
   const [page, setPage] = useState(0)
@@ -40,11 +40,11 @@ export const UsersPage = () => {
       
       <UserTable users={users} />
       
-      <UserTablePagination page={page}
-                           onPageChange={handleChangePage}
-                           onRowsPerPageChange={handleChangeRowsPerPage}
-                           rowsPerPage={rowsPerPage}
-                           count={100} />
+      <TablePaginationCustom page={page}
+                             onPageChange={handleChangePage}
+                             onRowsPerPageChange={handleChangeRowsPerPage}
+                             rowsPerPage={rowsPerPage}
+                             count={100} />
     </Container>
   )
 }

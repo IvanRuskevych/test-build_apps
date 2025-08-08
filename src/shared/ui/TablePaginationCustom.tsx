@@ -9,7 +9,7 @@ interface TablePaginationProps {
   onRowsPerPageChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const UserTablePagination = ({
+export const TablePaginationCustom = ({
   page,
   rowsPerPage,
   count,
