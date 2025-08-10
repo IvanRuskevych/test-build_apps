@@ -36,7 +36,8 @@ const FilterBarComponent = ({
       
       <Button
         variant="contained"
-        onClick={onReset}>
+        onClick={onReset}
+        fullWidth>
         Reset filters
       </Button>
     </Box>

@@ -18,6 +18,7 @@ export const UsersPage = () => {
     gender,
     nat: nationality,
   })
+  
   console.log(users, loading, error)
   
   const handleChangePage = (
@@ -44,7 +45,7 @@ export const UsersPage = () => {
   return (
     <Container maxWidth="md">
       
-      <Typography variant={'h4'}
+      <Typography variant={'h1'}
                   textAlign={'center'}
                   mb={3}>
         Users page
