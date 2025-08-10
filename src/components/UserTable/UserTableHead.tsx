@@ -6,7 +6,8 @@ const UserTableHeadComponent = () => (
   <TableHead>
     <TableRow>
       {columns.map((col) => (
-        <TableCell key={col.id}>
+        <TableCell key={col.id}
+                   sx={{ width: col.width }}>
           {col.label}
         </TableCell>
       ))}

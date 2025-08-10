@@ -1,14 +1,18 @@
 import { TableBody } from '@mui/material'
 import { memo } from 'react'
+import { LoadingSkeletonRows } from '~/components/UserTable/LoadingSkeletonRows.tsx'
 import { UserRow } from '~/components/UserTable/UserRow.tsx'
-import type { UsersListProps } from '~/types'
+import type { UserTableProps } from '~/types'
 
-const UserTableBodyComponent = ({ users }: UsersListProps) => (
+const UserTableBodyComponent = ({ users, loading, rowsPerPage }: UserTableProps) => (
   <TableBody>
-    {users.map((user) => (
-      <UserRow key={user.login.uuid}
-               user={user} />
-    ))}
+    {loading
+      ? <LoadingSkeletonRows rowsPerPage={rowsPerPage} />
+      : users.map((user) => (
+        <UserRow key={user.login.uuid}
+                 user={user} />
+      ))
+    }
   </TableBody>
 )
 

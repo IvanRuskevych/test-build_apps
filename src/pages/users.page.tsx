@@ -42,7 +42,7 @@ export const UsersPage = () => {
   }
   
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="lg">
       
       <Typography variant={'h1'}
                   textAlign={'center'}
@@ -63,7 +63,9 @@ export const UsersPage = () => {
                  onReset={handleResetFilters}
       />
       
-      <UserTable users={users} />
+      <UserTable users={users}
+                 loading={loading}
+                 rowsPerPage={rowsPerPage} />
       
       <TablePaginationCustom page={page}
                              onPageChange={handleChangePage}

@@ -1,7 +1,7 @@
 export const columns = [
-  { id: 'firstName', label: 'First Name' },
-  { id: 'lastName', label: 'Last Name' },
-  { id: 'gender', label: 'Gender' },
-  { id: 'email', label: 'Email' },
-  { id: 'nat', label: 'Nationality' },
+  { id: 'firstName', label: 'First Name', width: '20%' },
+  { id: 'lastName', label: 'Last Name', width: '20%' },
+  { id: 'gender', label: 'Gender', width: '15%' },
+  { id: 'email', label: 'Email', width: '35%' },
+  { id: 'nat', label: 'Nationality', width: '10%' },
 ]
