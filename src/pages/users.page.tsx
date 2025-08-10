@@ -1,12 +1,15 @@
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import { type ChangeEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FilterBar } from '~/components/FilterBar'
 import { UserTable } from '~/components/UserTable'
 import { useUserFilters, useUsers } from '~/hooks'
+import { ROUTER_KEYS } from '~/shared/const'
 import { TablePaginationCustom } from '~/shared/ui'
 
 export const UsersPage = () => {
+  const navigate = useNavigate()
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const { page, gender, nationality, setPage, setGender, setNationality } = useUserFilters()
   const { users, loading, error } = useUsers({
@@ -31,6 +34,13 @@ export const UsersPage = () => {
     setPage(0)
   }
   
+  const handleResetFilters = () => {
+    setPage(1)
+    setGender('all')
+    setNationality('all')
+    navigate({ pathname: ROUTER_KEYS.USER_DASH, search: '' })
+  }
+  
   return (
     <Container maxWidth="md">
       
@@ -49,7 +59,9 @@ export const UsersPage = () => {
                  onNationalityChange={(value) => {
                    setNationality(value)
                    setPage(1)
-                 }} />
+                 }}
+                 onReset={handleResetFilters}
+      />
       
       <UserTable users={users} />
       

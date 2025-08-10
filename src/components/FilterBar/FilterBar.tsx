@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import Button from '@mui/material/Button'
 import { memo } from 'react'
 import { baseOption, genderOptions, natOptions } from '~/components/FilterBar/options.ts'
 import { LabeledSelectCustom } from '~/shared/ui'
@@ -8,6 +9,7 @@ interface FilterBarProps {
   nationality: string;
   onGenderChange: (value: string) => void;
   onNationalityChange: (value: string) => void;
+  onReset: () => void;
 }
 
 const FilterBarComponent = ({
@@ -15,6 +17,7 @@ const FilterBarComponent = ({
   nationality,
   onGenderChange,
   onNationalityChange,
+  onReset,
 }: FilterBarProps) => {
   return (
     <Box display="flex"
@@ -30,6 +33,12 @@ const FilterBarComponent = ({
                            value={nationality}
                            options={[...baseOption, ...natOptions]}
                            onChange={onNationalityChange} />
+      
+      <Button
+        variant="contained"
+        onClick={onReset}>
+        Reset filters
+      </Button>
     </Box>
   )
 }
