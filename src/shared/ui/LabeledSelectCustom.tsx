@@ -1,4 +1,4 @@
-import type { SelectChangeEvent } from '@mui/material'
+import type { SelectChangeEvent, SxProps, Theme } from '@mui/material'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import type { FC } from 'react'
 
@@ -7,6 +7,7 @@ interface LabeledSelectCustomProps {
   value: string;
   options: { label: string; value: string }[];
   onChange: (value: string) => void;
+  sx?: SxProps<Theme>
 }
 
 export const LabeledSelectCustom: FC<LabeledSelectCustomProps> = ({
@@ -14,8 +15,10 @@ export const LabeledSelectCustom: FC<LabeledSelectCustomProps> = ({
   value,
   options,
   onChange,
+  sx,
 }) => (
-  <FormControl fullWidth>
+  <FormControl fullWidth
+               sx={sx}>
     <InputLabel>{label}</InputLabel>
     <Select value={value}
             label={label}
