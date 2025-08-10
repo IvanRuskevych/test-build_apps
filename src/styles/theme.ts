@@ -1,6 +1,10 @@
 import { createTheme, responsiveFontSizes } from '@mui/material'
 import { green, purple } from '~/styles/colors.ts'
 
+const fontSizeLargeClamp = 'clamp(1rem, 1vw, 1rem)'
+const fontSizeBaseClamp = 'clamp(0.85rem, 1vw, 1rem)'
+const fontSizeSmallClamp = 'clamp(0.75rem, 1vw, 1rem)'
+
 let theme = createTheme({
   typography: {
     fontFamily: [
@@ -51,7 +55,7 @@ let theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         input: {
-          fontSize: 'clamp(0.85rem, 1vw, 1rem)',
+          fontSize: fontSizeLargeClamp,
         },
       },
     },
@@ -59,7 +63,15 @@ let theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          fontSize: 'clamp(0.85rem, 1vw, 1rem)',
+          fontSize: fontSizeLargeClamp,
+        },
+      },
+    },
+    
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          fontSize: fontSizeBaseClamp,
         },
       },
     },
@@ -68,7 +80,7 @@ let theme = createTheme({
       styleOverrides: {
         root: {
           fontWeight: 500,
-          fontSize: 'clamp(0.85rem, 1vw, 1rem)',
+          fontSize: fontSizeBaseClamp,
           textTransform: 'none',
         },
       },
@@ -77,7 +89,8 @@ let theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          fontSize: 'clamp(0.85rem, 1vw, 1rem)',
+          fontSize: fontSizeSmallClamp,
+          padding: '0.5rem',
         },
         head: {
           fontWeight: 600,
@@ -91,8 +104,21 @@ let theme = createTheme({
         root: {
           backgroundColor: green[100],
         },
+        displayedRows: {
+          fontSize: fontSizeSmallClamp,
+        },
+        selectLabel: {
+          fontSize: fontSizeSmallClamp,
+        },
+        select: {
+          fontSize: fontSizeSmallClamp,
+        },
+        actions: {
+          fontSize: fontSizeSmallClamp,
+        },
       },
     },
+    
   },
 })
 

@@ -8,6 +8,7 @@ interface LabeledSelectCustomProps {
   options: { label: string; value: string }[];
   onChange: (value: string) => void;
   sx?: SxProps<Theme>
+  size?: 'small' | 'medium'
 }
 
 export const LabeledSelectCustom: FC<LabeledSelectCustomProps> = ({
@@ -16,9 +17,11 @@ export const LabeledSelectCustom: FC<LabeledSelectCustomProps> = ({
   options,
   onChange,
   sx,
+  size,
 }) => (
   <FormControl fullWidth
-               sx={sx}>
+               sx={sx}
+               size={size}>
     <InputLabel>{label}</InputLabel>
     <Select value={value}
             label={label}

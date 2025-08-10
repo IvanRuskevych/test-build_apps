@@ -32,6 +32,7 @@ const FilterBarComponent = ({
                            value={gender}
                            options={[...baseOption, ...genderOptions]}
                            onChange={onGenderChange}
+                           size={isMobile ? 'small' : 'medium'}
                            sx={{
                              flex: isMobile ? '1 1 auto' : 1,
                            }} />
@@ -40,6 +41,7 @@ const FilterBarComponent = ({
                            value={nationality}
                            options={[...baseOption, ...natOptions]}
                            onChange={onNationalityChange}
+                           size={isMobile ? 'small' : 'medium'}
                            sx={{
                              flex: isMobile ? '1 1 auto' : 1,
                            }} />
