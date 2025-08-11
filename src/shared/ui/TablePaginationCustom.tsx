@@ -1,5 +1,5 @@
 import TablePagination from '@mui/material/TablePagination'
-import { type ChangeEvent, type MouseEvent } from 'react'
+import { type ChangeEvent, memo, type MouseEvent } from 'react'
 
 interface TablePaginationProps {
   page: number
@@ -9,7 +9,7 @@ interface TablePaginationProps {
   onRowsPerPageChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const TablePaginationCustom = ({
+const TablePaginationCustomComponent = ({
   page,
   rowsPerPage,
   count,
@@ -26,3 +26,5 @@ export const TablePaginationCustom = ({
     rowsPerPageOptions={[5, 10, 20]}
   />
 )
+
+export const TablePaginationCustom = memo(TablePaginationCustomComponent)

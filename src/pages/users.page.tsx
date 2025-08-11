@@ -1,6 +1,6 @@
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
-import { type ChangeEvent, useState } from 'react'
+import { type ChangeEvent, memo, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { FilterBar, UserTable } from '~/components'
@@ -8,7 +8,7 @@ import { useUserFilters, useUsers } from '~/hooks'
 import { ROUTER_KEYS } from '~/shared/const'
 import { TablePaginationCustom } from '~/shared/ui'
 
-export const UsersPage = () => {
+const UsersPageComponent = () => {
   const navigate = useNavigate()
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const { page, gender, nationality, setPage, setGender, setNationality } = useUserFilters()
@@ -19,27 +19,49 @@ export const UsersPage = () => {
     nat: nationality,
   })
   
-  const handleChangePage = (
-    _event: unknown,
-    newPage: number,
-  ) => {
-    setPage(newPage)
-  }
+  const handleChangePage = useCallback(
+    (
+      _event: unknown,
+      newPage: number,
+    ) => {
+      setPage(newPage)
+    }, [setPage],
+  )
   
-  const handleChangeRowsPerPage = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
-    setPage(0)
-  }
+  const handleChangeRowsPerPage = useCallback(
+    (
+      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+      setRowsPerPage(parseInt(event.target.value, 10))
+      setPage(0)
+    }, [setPage, setRowsPerPage],
+  )
   
-  const handleResetFilters = () => {
-    setPage(1)
-    setGender('all')
-    setNationality('all')
-    navigate({ pathname: ROUTER_KEYS.USER_DASH, search: '' })
-    toast.success('Filters reset successfully')
-  }
+  const handleResetFilters = useCallback(
+    () => {
+      setPage(1)
+      setGender('all')
+      setNationality('all')
+      navigate({ pathname: ROUTER_KEYS.USER_DASH, search: '' })
+      toast.success('Filters reset successfully')
+    }, [setPage, setGender, setNationality, navigate],
+  )
+  
+  const handleGenderChange = useCallback(
+    (value: string) => {
+      setGender(value)
+      setPage(1)
+    },
+    [setGender, setPage],
+  )
+  
+  const handleNationalityChange = useCallback(
+    (value: string) => {
+      setNationality(value)
+      setPage(1)
+    },
+    [setNationality, setPage],
+  )
   
   return (
     <Container maxWidth="lg">
@@ -53,14 +75,8 @@ export const UsersPage = () => {
       
       <FilterBar gender={gender}
                  nationality={nationality}
-                 onGenderChange={(value) => {
-                   setGender(value)
-                   setPage(1)
-                 }}
-                 onNationalityChange={(value) => {
-                   setNationality(value)
-                   setPage(1)
-                 }}
+                 onGenderChange={handleGenderChange}
+                 onNationalityChange={handleNationalityChange}
                  onReset={handleResetFilters}
       />
       
@@ -83,3 +99,5 @@ export const UsersPage = () => {
     </Container>
   )
 }
+
+export const UsersPage = memo(UsersPageComponent)
