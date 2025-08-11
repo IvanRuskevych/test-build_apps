@@ -2,6 +2,7 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import { type ChangeEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { FilterBar, UserTable } from '~/components'
 import { useUserFilters, useUsers } from '~/hooks'
 import { ROUTER_KEYS } from '~/shared/const'
@@ -11,14 +12,12 @@ export const UsersPage = () => {
   const navigate = useNavigate()
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const { page, gender, nationality, setPage, setGender, setNationality } = useUserFilters()
-  const { users, loading, error } = useUsers({
+  const { users, loading } = useUsers({
     page: page + 1,
     rowsPerPage,
     gender,
     nat: nationality,
   })
-  
-  console.log(users, loading, error)
   
   const handleChangePage = (
     _event: unknown,
@@ -39,6 +38,7 @@ export const UsersPage = () => {
     setGender('all')
     setNationality('all')
     navigate({ pathname: ROUTER_KEYS.USER_DASH, search: '' })
+    toast.success('Filters reset successfully')
   }
   
   return (
@@ -46,8 +46,9 @@ export const UsersPage = () => {
       
       <Typography variant={'h1'}
                   textAlign={'center'}
-                  mb={3}>
-        Users page
+                  mb={3}
+                  color={'secondary.main'}>
+        Users Dashboard
       </Typography>
       
       <FilterBar gender={gender}
@@ -66,6 +67,13 @@ export const UsersPage = () => {
       <UserTable users={users}
                  loading={loading}
                  rowsPerPage={rowsPerPage} />
+      
+      {!loading && !users.length && (
+        <Typography textAlign="center"
+                    mt={4}>
+          No users found.
+        </Typography>
+      )}
       
       <TablePaginationCustom page={page}
                              onPageChange={handleChangePage}

@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import { ApiResponseSchema, type User } from '~/schemas'
 import { HttpService } from '~/services/httpService.ts'
 
@@ -13,7 +14,9 @@ export const userService = {
     const params: Record<string, string | number> = {
       page,
       results: rowsPerPage,
-      // seed: SEED, // required for stable pagination with randomuser.me API. But using the "seed" break filtering by param "gender"
+      // seed: SEED, // Required for stable pagination with randomuser.me API,
+      // but using "seed" breaks filtering by the "gender" parameter.
+      
     }
     
     if (gender && gender !== 'all') params.gender = gender
@@ -24,8 +27,8 @@ export const userService = {
     const parsed = ApiResponseSchema.safeParse(response.data)
     
     if (!parsed.success) {
-      console.error('Invalid API response:', parsed.error.issues)
-      throw new Error('Invalid API response')
+      toast.error('Invalid API response from RandomUser API')
+      return []
     }
     
     return parsed.data?.results
