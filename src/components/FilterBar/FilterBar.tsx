@@ -20,8 +20,8 @@ const FilterBarComponent = ({
   onNationalityChange,
   onReset,
 }: FilterBarProps) => {
-  
   const { isMobile } = useBreakpoints()
+  const isParamsAll = nationality === 'all' && gender === 'all'
   
   return (
     <Box display="flex"
@@ -50,6 +50,7 @@ const FilterBarComponent = ({
         variant="contained"
         onClick={onReset}
         fullWidth
+        disabled={isParamsAll}
         sx={{
           backgroundColor: 'secondary.main',
           width: isMobile ? '100%' : 125,

@@ -1,29 +1,31 @@
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { getFiltersFromParams } from '~/utils'
 
 export const useUserFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   
-  const [page, setPage] = useState(1)
-  const [gender, setGender] = useState('all')
-  const [nationality, setNationality] = useState('all')
+  const page = parseInt(searchParams.get('page') || '1', 10)
+  const gender = searchParams.get('gender') || 'all'
+  const nationality = searchParams.get('nat') || 'all'
   
-  useEffect(() => {
-    const { page, gender, nationality } = getFiltersFromParams(searchParams)
-    
-    setPage(page)
-    setGender(gender)
-    setNationality(nationality)
-  }, [searchParams])
+  const setPage = (newPage: number) => {
+    const newParams = new URLSearchParams(searchParams)
+    newParams.set('page', String(newPage))
+    setSearchParams(newParams)
+  }
   
-  useEffect(() => {
-    setSearchParams({
-      page: page.toString(),
-      gender,
-      nat: nationality,
-    })
-  }, [page, gender, nationality, setSearchParams])
+  const setGender = (newGender: string) => {
+    const newParams = new URLSearchParams(searchParams)
+    newParams.set('gender', newGender)
+    newParams.set('page', '1')
+    setSearchParams(newParams)
+  }
+  
+  const setNationality = (newNat: string) => {
+    const newParams = new URLSearchParams(searchParams)
+    newParams.set('nat', newNat)
+    newParams.set('page', '1')
+    setSearchParams(newParams)
+  }
   
   return {
     page,

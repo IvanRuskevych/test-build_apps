@@ -11,9 +11,10 @@ import { TablePaginationCustom } from '~/shared/ui'
 const UsersPageComponent = () => {
   const navigate = useNavigate()
   const [rowsPerPage, setRowsPerPage] = useState(10)
+  
   const { page, gender, nationality, setPage, setGender, setNationality } = useUserFilters()
   const { users, loading } = useUsers({
-    page: page + 1,
+    page,
     rowsPerPage,
     gender,
     nat: nationality,
@@ -24,7 +25,7 @@ const UsersPageComponent = () => {
       _event: unknown,
       newPage: number,
     ) => {
-      setPage(newPage)
+      setPage(newPage + 1)
     }, [setPage],
   )
   
@@ -33,34 +34,29 @@ const UsersPageComponent = () => {
       event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
       setRowsPerPage(parseInt(event.target.value, 10))
-      setPage(0)
+      setPage(1)
     }, [setPage, setRowsPerPage],
   )
   
   const handleResetFilters = useCallback(
     () => {
-      setPage(1)
-      setGender('all')
-      setNationality('all')
       navigate({ pathname: ROUTER_KEYS.USER_DASH, search: '' })
       toast.success('Filters reset successfully')
-    }, [setPage, setGender, setNationality, navigate],
+    }, [navigate],
   )
   
   const handleGenderChange = useCallback(
     (value: string) => {
       setGender(value)
-      setPage(1)
     },
-    [setGender, setPage],
+    [setGender],
   )
   
   const handleNationalityChange = useCallback(
     (value: string) => {
       setNationality(value)
-      setPage(1)
     },
-    [setNationality, setPage],
+    [setNationality],
   )
   
   return (
