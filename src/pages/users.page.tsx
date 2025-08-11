@@ -14,7 +14,7 @@ const UsersPageComponent = () => {
   
   const { page, gender, nationality, setPage, setGender, setNationality } = useUserFilters()
   const { users, loading } = useUsers({
-    page,
+    page: page + 1,
     rowsPerPage,
     gender,
     nat: nationality,
@@ -25,7 +25,7 @@ const UsersPageComponent = () => {
       _event: unknown,
       newPage: number,
     ) => {
-      setPage(newPage + 1)
+      setPage(newPage)
     }, [setPage],
   )
   

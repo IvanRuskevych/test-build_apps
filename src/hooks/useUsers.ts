@@ -18,7 +18,7 @@ export const useUsers = ({ page, rowsPerPage, gender, nat }: UseUsersParams) => 
         setLoading(true)
         const data = await userService.getUsers(page, rowsPerPage, gender, nat)
         setUsers(data)
-      } catch (err) {
+      } catch {
         setUsers([])
       } finally {
         setLoading(false)
