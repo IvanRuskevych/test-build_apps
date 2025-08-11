@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
+import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom'
 import { Layout } from '~/layout/Layout.tsx'
 import { HomePage, UsersPage } from '~/pages'
 import { ROUTER_KEYS } from '~/shared/const'
@@ -11,6 +11,9 @@ export const router = createBrowserRouter(
              element={<HomePage />} />
       <Route path={ROUTER_KEYS.USER_DASH}
              element={<UsersPage />} />
+      <Route path={ROUTER_KEYS.ALL_MATCH}
+             element={<Navigate to={ROUTER_KEYS.ROOT}
+                                replace />} />
     </Route>,
   ),
 )
